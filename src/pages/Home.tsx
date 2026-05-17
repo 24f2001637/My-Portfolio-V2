@@ -237,6 +237,129 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Expertise & Skills */}
+      <section className="py-20 border-t border-theme-border">
+        <div className="flex items-baseline justify-between mb-10 pb-5 border-b border-theme-border">
+          <div>
+            <div className="font-mono text-[10px] text-theme-text3 tracking-[0.1em] uppercase">What I do</div>
+            <h2 className="font-serif text-4xl tracking-[-0.02em] text-theme-text">Expertise & <em className="italic text-theme-accent">Skills</em></h2>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-theme-card border border-theme-border rounded-3xl p-8 hover:border-theme-accent transition-colors duration-300">
+            <LucideIcons.Brain className="w-8 h-8 text-theme-accent mb-6" />
+            <h3 className="font-serif text-xl text-theme-text mb-3">AI & Machine Learning</h3>
+            <p className="text-sm text-theme-text2 mb-6 leading-relaxed">
+              Building intelligent systems using deep learning, NLP, and computer vision. From predictive modeling to generative AI applications.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {['PyTorch', 'TensorFlow', 'Scikit-Learn', 'LLMs', 'OpenCV'].map(skill => (
+                <span key={skill} className="font-mono text-[9px] px-2 py-1 rounded border border-theme-border bg-theme-bg2 text-theme-text3">{skill}</span>
+              ))}
+            </div>
+          </div>
+          
+          <div className="bg-theme-card border border-theme-border rounded-3xl p-8 hover:border-theme-accent transition-colors duration-300">
+            <LucideIcons.Database className="w-8 h-8 text-theme-accent mb-6" />
+            <h3 className="font-serif text-xl text-theme-text mb-3">Data Science</h3>
+            <p className="text-sm text-theme-text2 mb-6 leading-relaxed">
+              Extracting actionable insights from complex datasets. Expertise in statistical analysis, data visualization, and pipeline engineering.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {['Python', 'Pandas', 'SQL', 'Tableau', 'Spark'].map(skill => (
+                <span key={skill} className="font-mono text-[9px] px-2 py-1 rounded border border-theme-border bg-theme-bg2 text-theme-text3">{skill}</span>
+              ))}
+            </div>
+          </div>
+          
+          <div className="bg-theme-card border border-theme-border rounded-3xl p-8 hover:border-theme-accent transition-colors duration-300">
+            <LucideIcons.Code2 className="w-8 h-8 text-theme-accent mb-6" />
+            <h3 className="font-serif text-xl text-theme-text mb-3">Full-Stack Dev</h3>
+            <p className="text-sm text-theme-text2 mb-6 leading-relaxed">
+              Developing scalable web applications and robust APIs. Creating seamless user experiences combined with powerful backend architecture.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {['React', 'TypeScript', 'Node.js', 'Next.js', 'Tailwind CSS'].map(skill => (
+                <span key={skill} className="font-mono text-[9px] px-2 py-1 rounded border border-theme-border bg-theme-bg2 text-theme-text3">{skill}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience & Education */}
+      <section className="py-20 border-t border-theme-border">
+        <div className="flex flex-col md:flex-row gap-12 lg:gap-20">
+          <div className="w-full md:w-1/2">
+            <div className="flex items-baseline justify-between mb-8 pb-4 border-b border-theme-border">
+              <div>
+                <div className="font-mono text-[10px] text-theme-text3 tracking-[0.1em] uppercase">Career</div>
+                <h2 className="font-serif text-3xl tracking-[-0.02em] text-theme-text">Experience</h2>
+              </div>
+            </div>
+            
+            <div className="flex flex-col gap-8">
+              <div className="flex gap-4 group">
+                <div className="flex flex-col items-center">
+                  <div className="w-2.5 h-2.5 rounded-full bg-theme-accent group-hover:scale-125 transition-transform duration-300"></div>
+                  <div className="w-px h-full bg-theme-border mt-2"></div>
+                </div>
+                <div className="pb-2">
+                  <div className="font-mono text-[10px] text-theme-accent mb-1">2023 — Present</div>
+                  <h4 className="font-serif text-lg text-theme-text">Freelance Full-Stack Developer</h4>
+                  <div className="text-sm text-theme-text2 mb-2">Self-employed</div>
+                  <p className="text-xs text-theme-text3 leading-relaxed">
+                    Building custom web applications, delivering intuitive UIs, and robust backends for various clients. Focusing on scalable architectures and AI integrations.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex gap-4 group">
+                <div className="flex flex-col items-center">
+                  <div className="w-2.5 h-2.5 rounded-full bg-theme-bg2 border border-theme-border group-hover:border-theme-accent transition-colors duration-300"></div>
+                  <div className="w-px h-full bg-theme-border mt-2"></div>
+                </div>
+                <div className="pb-2">
+                  <div className="font-mono text-[10px] text-theme-text3 mb-1">2022 — 2023</div>
+                  <h4 className="font-serif text-lg text-theme-text">Data Science Intern</h4>
+                  <div className="text-sm text-theme-text2 mb-2">Tech Startup</div>
+                  <p className="text-xs text-theme-text3 leading-relaxed">
+                    Developed predictive models and data visualization dashboards. Assisted in data cleaning, exploratory data analysis, and deploying ML models to production.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="w-full md:w-1/2">
+            <div className="flex items-baseline justify-between mb-8 pb-4 border-b border-theme-border">
+              <div>
+                <div className="font-mono text-[10px] text-theme-text3 tracking-[0.1em] uppercase">Academic</div>
+                <h2 className="font-serif text-3xl tracking-[-0.02em] text-theme-text">Education</h2>
+              </div>
+            </div>
+            
+            <div className="flex flex-col gap-8">
+              <div className="flex gap-4 group">
+                <div className="flex flex-col items-center">
+                  <div className="w-2.5 h-2.5 rounded-full bg-theme-accent group-hover:scale-125 transition-transform duration-300"></div>
+                  <div className="w-px h-full bg-theme-border mt-2"></div>
+                </div>
+                <div className="pb-2">
+                  <div className="font-mono text-[10px] text-theme-accent mb-1">2021 — 2025</div>
+                  <h4 className="font-serif text-lg text-theme-text">BS in Data Science and Applications</h4>
+                  <div className="text-sm text-theme-text2 mb-2">IIT Madras</div>
+                  <p className="text-xs text-theme-text3 leading-relaxed">
+                    Comprehensive study of Mathematics, Statistics, Machine Learning, and Software Development. Consistently maintaining a strong GPA.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Latest Writings */}
       <section className="py-20 border-t border-theme-border">
         <div className="flex items-baseline justify-between mb-10 pb-5 border-b border-theme-border">
