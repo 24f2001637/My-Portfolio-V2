@@ -12,7 +12,7 @@ export default function Projects() {
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "projects"), (snap) => {
-      const fetchedProjects = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const fetchedProjects = snap.docs.map(d => ({ id: d.id, ...d.data() })) as any[];
       setProjects(fetchedProjects);
       
       const categories: string[] = [];

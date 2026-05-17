@@ -13,7 +13,7 @@ export default function Resources() {
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "resources"), (snap) => {
-      const fetchedResources = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const fetchedResources = snap.docs.map(d => ({ id: d.id, ...d.data() })) as any[];
       setResources(fetchedResources);
       
       const types: string[] = [];

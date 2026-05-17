@@ -15,7 +15,7 @@ export default function Writings() {
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "blogs"), (snap) => {
-      const fetchedBlogs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const fetchedBlogs = snap.docs.map(d => ({ id: d.id, ...d.data() })) as any[];
       setBlogs(fetchedBlogs);
       
       const categories: string[] = [];
