@@ -67,8 +67,14 @@ export default function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contact | Sahil Bind</title>
-        <meta name="description" content="Get in touch with Sahil Bind." />
+        <title>Get In Touch | Sahil Bind — Data Scientist & Developer</title>
+        <meta name="description" content="Interested in collaborating on a Data Science project or building a modern web application? Get in touch with Sahil Bind for inquiries, opportunities, or just a friendly chat." />
+        <meta property="og:title" content="Contact Sahil Bind" />
+        <meta property="og:description" content="Reach out to Sahil Bind for collaborations on AI, Data Science, or Web Development." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sahil.bind/contact" />
+        <meta name="twitter:title" content="Get In Touch | Sahil Bind" />
+        <meta name="twitter:description" content="Connect with Sahil for your next project." />
       </Helmet>
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20 fade-in">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">

@@ -41,8 +41,14 @@ export default function Projects() {
   return (
     <>
       <Helmet>
-        <title>Projects | Sahil Bind</title>
-        <meta name="description" content="Projects and experiments by Sahil Bind." />
+        <title>Projects Portfolio | Sahil Bind — Data Science & Web Apps</title>
+        <meta name="description" content="Explore a curated collection of projects by Sahil Bind, ranging from Machine Learning models and Data Analysis to full-stack Web Applications. See how AI and data drive real-world solutions." />
+        <meta property="og:title" content="Projects Portfolio — Sahil Bind" />
+        <meta property="og:description" content="A showcase of AI, Data Science, and Web Development projects by Sahil Bind." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sahil.bind/projects" />
+        <meta name="twitter:title" content="Projects Portfolio | Sahil Bind" />
+        <meta name="twitter:description" content="Explore Sahil's latest projects in ML, Data Science, and Web Development." />
       </Helmet>
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20 fade-in">
         <div className="flex flex-col mb-10 pb-5 border-b border-theme-border">

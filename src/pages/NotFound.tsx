@@ -6,7 +6,8 @@ export default function NotFound() {
   return (
     <div className="min-h-[calc(100vh-140px)] flex flex-col items-center justify-center p-6 text-center fade-in">
       <Helmet>
-        <title>404 Not Found | Sahil</title>
+        <title>404 Page Not Found | Sahil Bind</title>
+        <meta name="robots" content="noindex" />
       </Helmet>
       
       <div className="font-mono text-theme-accent mb-4">Error 404</div>

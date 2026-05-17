@@ -85,13 +85,17 @@ export default function BlogDetail() {
   return (
     <>
       <Helmet>
-        <title>{blog.title} | Sahil</title>
-        <meta name="description" content={blog.excerpt || blog.title} />
-        {/* Open Graph tags for social sharing */}
-        <meta property="og:title" content={blog.title} />
-        <meta property="og:description" content={blog.excerpt || blog.title} />
+        <title>{blog.title} | Sahil Bind — Blog</title>
+        <meta name="description" content={blog.excerpt || `Read "${blog.title}" by Sahil Bind, exploring topics in Data Science, AI, and development.`} />
+        <meta property="og:title" content={`${blog.title} | Sahil Bind — Blog`} />
+        <meta property="og:description" content={blog.excerpt || `Dive into this article about ${blog.category || 'tech'} by Sahil Bind.`} />
         {blog.coverImage && <meta property="og:image" content={blog.coverImage} />}
         <meta property="og:type" content="article" />
+        <meta property="article:published_time" content={blog.date} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={blog.title} />
+        <meta name="twitter:description" content={blog.excerpt || `Read this blog post by Sahil Bind.`} />
+        {blog.coverImage && <meta name="twitter:image" content={blog.coverImage} />}
       </Helmet>
       <div 
         className="fixed top-[60px] left-0 h-[2px] bg-theme-accent z-[99] transition-all duration-150"

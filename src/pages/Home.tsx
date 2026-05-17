@@ -59,8 +59,17 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Sahil Bind - Data Scientist & Developer</title>
-        <meta name="description" content="Portfolio of Sahil Bind, exploring AI, Data Science, and Web Development." />
+        <title>Sahil Bind — Data Scientist, ML Engineer & Full-stack Developer</title>
+        <meta name="description" content="Explore the portfolio of Sahil Bind, a Data Scientist and Developer specialized in AI, Machine Learning, and modern Web Technologies. Discover projects, writings, and resources." />
+        <meta property="og:title" content="Sahil Bind — Data Scientist & Developer" />
+        <meta property="og:description" content="Portfolio and insights on AI, Machine Learning, and Web Development by Sahil Bind." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sahil.bind" />
+        <meta property="og:image" content="/og-image.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Sahil Bind — Data Scientist & Developer" />
+        <meta name="twitter:description" content="Portfolio and insights on AI, Machine Learning, and Web Development by Sahil Bind." />
+        <meta name="twitter:image" content="/og-image.png" />
       </Helmet>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Hero */}

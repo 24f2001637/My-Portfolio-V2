@@ -4,6 +4,7 @@ import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut, User 
 import { collection, onSnapshot, doc, setDoc, deleteDoc, getDocs, updateDoc } from "firebase/firestore";
 import { toast } from "sonner";
 import { compressImage } from "../lib/utils";
+import { Helmet } from "react-helmet-async";
 
 const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, setField: (v: string) => void) => {
   if (e.target.files && e.target.files[0]) {
@@ -91,7 +92,12 @@ function Admin() {
 
   // Admin Dashboard
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-8 pb-20 overflow-x-hidden w-full">
+    <>
+      <Helmet>
+        <title>Admin Dashboard | Sahil Bind</title>
+        <meta name="robots" content="noindex" />
+      </Helmet>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-8 pb-20 overflow-x-hidden w-full">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-theme-border pb-6 gap-4 w-full">
         <div>
           <h1 className="font-serif text-3xl sm:text-4xl text-theme-text tracking-[-0.02em]">Admin Dashboard</h1>
@@ -124,6 +130,7 @@ function Admin() {
         {activeTab === "projects" && <ProjectAdmin />}
       </div>
     </div>
+    </>
   );
 }
 

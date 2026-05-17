@@ -52,7 +52,7 @@ export default function CommandPalette({ isOpen, onClose, toggleTheme }: { isOpe
   
   const filteredProjects = q ? projects.filter(p => p.name?.toLowerCase().includes(q) || p.description?.toLowerCase().includes(q)) : [];
   const filteredBlogs = q ? blogs.filter(b => b.title?.toLowerCase().includes(q) || b.excerpt?.toLowerCase().includes(q)) : [];
-  const filteredResources = q ? resources.filter(r => r.name?.toLowerCase().includes(q) || r.desc?.toLowerCase().includes(q)) : [];
+  const filteredResources = q ? resources.filter(r => r.name?.toLowerCase().includes(q) || r.description?.toLowerCase().includes(q)) : [];
 
   return (
     <div 
@@ -99,7 +99,7 @@ export default function CommandPalette({ isOpen, onClose, toggleTheme }: { isOpe
               
               <div className="p-2 border-t border-theme-border">
                 <div className="font-mono text-[9px] text-theme-text3 uppercase tracking-wider px-2.5 py-1 mb-0.5">Quick Actions</div>
-                <button onClick={onClose} className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-theme-accent-bg text-left group">
+                <button onClick={() => { navigate('/contact'); onClose(); }} className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-theme-accent-bg text-left group">
                   <span className="w-6 flex items-center justify-center text-theme-text3"><FileText size={14}/></span>
                   <span className="text-[13px] text-theme-text flex-1">Download Resume</span>
                   <span className="font-mono text-[9px] text-theme-text3 bg-theme-bg2 px-1.5 py-0.5 rounded group-hover:bg-theme-bg3">PDF</span>
@@ -148,7 +148,7 @@ export default function CommandPalette({ isOpen, onClose, toggleTheme }: { isOpe
                 <div className="mb-2">
                   <div className="font-mono text-[9px] text-theme-text3 uppercase tracking-wider px-2.5 py-1 mb-0.5">Resources</div>
                   {filteredResources.map(res => (
-                    <button key={res.id} onClick={() => { window.open(res.demoLink || res.githubLink, '_blank'); onClose(); }} className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-theme-accent-bg text-left group">
+                    <button key={res.id} onClick={() => { if(res.actionLink) window.open(res.actionLink, '_blank'); onClose(); }} className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-theme-accent-bg text-left group">
                       <span className="w-6 flex items-center justify-center text-theme-text3"><Book size={14}/></span>
                       <span className="text-[13px] text-theme-text flex-1 truncate">{res.name}</span>
                       <span className="font-mono text-[9px] text-theme-text3 bg-theme-bg2 px-1.5 py-0.5 rounded group-hover:bg-theme-bg3">Resource</span>

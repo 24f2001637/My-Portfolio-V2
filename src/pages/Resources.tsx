@@ -42,8 +42,14 @@ export default function Resources() {
   return (
     <>
       <Helmet>
-        <title>Resources | Sahil Bind</title>
-        <meta name="description" content="Curated learning resources and materials by Sahil Bind." />
+        <title>Curated Resources for Data Science & AI | Sahil Bind</title>
+        <meta name="description" content="Access a curated hub of learning resources, guides, and materials for Data Science, Artificial Intelligence, and Software Development, handpicked and organized by Sahil Bind." />
+        <meta property="og:title" content="Curated Resources — Sahil Bind" />
+        <meta property="og:description" content="A knowledge hub of learning materials and guides for tech enthusiasts by Sahil Bind." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sahil.bind/resources" />
+        <meta name="twitter:title" content="Curated Resources | Sahil Bind" />
+        <meta name="twitter:description" content="Explore handcrafted resources for learning Data Science and AI." />
       </Helmet>
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20 fade-in">
         <div className="flex flex-col mb-10 pb-5 border-b border-theme-border">
