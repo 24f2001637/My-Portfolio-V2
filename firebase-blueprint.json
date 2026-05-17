@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "Resource": {
+      "title": "Resource",
+      "description": "A curated resource in the knowledge hub.",
+      "type": "object",
+      "properties": {
+        "icon": { "type": "string" },
+        "coverImage": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "type": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "badge": { "type": "string" },
+        "actionText": { "type": "string" },
+        "actionLink": { "type": "string" }
+      },
+      "required": ["type", "name", "description", "badge", "actionText", "actionLink"]
+    },
+    "Blog": {
+      "title": "Blog",
+      "description": "A written blog post.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "readTime": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "icon": { "type": "string" },
+        "content": { "type": "string" }
+      },
+      "required": ["title", "category", "readTime", "excerpt", "tags", "icon", "content"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "A portfolio project.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "stack": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "status": { "type": "string" },
+        "githubLink": { "type": "string" },
+        "demoLink": { "type": "string" },
+        "icon": { "type": "string" },
+        "coverImage": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "category", "description", "stack", "status", "githubLink", "demoLink"]
+    }
+  },
+  "firestore": {
+    "/resources/{resourceId}": {
+      "schema": { "$ref": "#/entities/Resource" },
+      "description": "Stores resources."
+    },
+    "/blogs/{blogId}": {
+      "schema": { "$ref": "#/entities/Blog" },
+      "description": "Stores blog posts."
+    },
+    "/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/Project" },
+      "description": "Stores portfolio projects."
+    }
+  }
+}

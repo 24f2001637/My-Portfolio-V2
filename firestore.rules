@@ -1,0 +1,132 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email_verified == true && request.auth.token.email == "sahilbind457@gmail.com";
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // --- Resources ---
+    function isValidResource(data) {
+      return data.keys().hasAll(['type', 'name', 'description', 'badge', 'actionText', 'actionLink', 'createdAt']) &&
+             data.keys().size() >= 7 && data.keys().size() <= 9 &&
+             data.type is string && data.type.size() <= 100 &&
+             data.name is string && data.name.size() <= 200 &&
+             data.description is string && data.description.size() <= 1000 &&
+             data.badge is string && data.badge.size() <= 50 &&
+             data.actionText is string && data.actionText.size() <= 50 &&
+             data.actionLink is string && data.actionLink.size() <= 500 &&
+             data.createdAt is string && data.createdAt.size() <= 50 &&
+             (!('icon' in data) || (data.icon is string && data.icon.size() <= 100)) &&
+             (!('coverImage' in data) || (data.coverImage is string && data.coverImage.size() <= 1000000));
+    }
+
+    match /resources/{resourceId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(resourceId) && isValidResource(request.resource.data);
+      allow update: if isAdmin() && isValidId(resourceId) && isValidResource(request.resource.data) && (
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['type', 'name', 'description', 'badge', 'actionText', 'actionLink', 'createdAt', 'icon', 'coverImage'])
+      );
+      allow delete: if isAdmin() && isValidId(resourceId);
+    }
+
+    // --- Blogs ---
+    function isValidBlog(data) {
+      return data.keys().hasAll(['title', 'category', 'readTime', 'excerpt', 'tags', 'icon', 'content', 'createdAt']) &&
+             data.keys().size() >= 8 && data.keys().size() <= 9 &&
+             data.title is string && data.title.size() <= 200 &&
+             data.category is string && data.category.size() <= 100 &&
+             data.readTime is string && data.readTime.size() <= 50 &&
+             data.excerpt is string && data.excerpt.size() <= 1000 &&
+             data.tags is list && data.tags.size() <= 20 && (data.tags.size() == 0 || data.tags[0] is string) &&
+             data.icon is string && data.icon.size() <= 100 &&
+             data.content is string && data.content.size() <= 100000 &&
+             data.createdAt is string && data.createdAt.size() <= 50 &&
+             (!('coverImage' in data) || (data.coverImage is string && data.coverImage.size() <= 1000000));
+    }
+
+    match /blogs/{blogId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(blogId) && isValidBlog(request.resource.data);
+      allow update: if isAdmin() && isValidId(blogId) && isValidBlog(request.resource.data) && (
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['title', 'category', 'readTime', 'excerpt', 'tags', 'icon', 'content', 'createdAt', 'coverImage'])
+      );
+      allow delete: if isAdmin() && isValidId(blogId);
+    }
+
+    // --- Projects ---
+    function isValidProject(data) {
+      return data.keys().hasAll(['name', 'category', 'description', 'stack', 'status', 'githubLink', 'demoLink', 'createdAt']) &&
+             data.keys().size() >= 8 && data.keys().size() <= 10 &&
+             data.name is string && data.name.size() <= 200 &&
+             data.category is string && data.category.size() <= 100 &&
+             data.description is string && data.description.size() <= 1000 &&
+             data.stack is list && data.stack.size() <= 20 && (data.stack.size() == 0 || data.stack[0] is string) &&
+             data.status is string && data.status.size() <= 50 &&
+             data.githubLink is string && data.githubLink.size() <= 500 &&
+             data.demoLink is string && data.demoLink.size() <= 500 &&
+             data.createdAt is string && data.createdAt.size() <= 50 &&
+             (!('icon' in data) || (data.icon is string && data.icon.size() <= 100)) &&
+             (!('coverImage' in data) || (data.coverImage is string && data.coverImage.size() <= 1000000));
+    }
+
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(projectId) && isValidProject(request.resource.data);
+      allow update: if isAdmin() && isValidId(projectId) && isValidProject(request.resource.data) && (
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name', 'category', 'description', 'stack', 'status', 'githubLink', 'demoLink', 'icon', 'coverImage', 'createdAt'])
+      );
+      allow delete: if isAdmin() && isValidId(projectId);
+    }
+    // --- Config ---
+    function isValidConfig(data) {
+      return data.keys().hasAll(['heroEyebrow', 'heroTags', 'heroTitle', 'heroTitleHighlight', 'heroSub', 'currentlyJSON', 'aboutText', 'aboutBio', 'statsJSON', 'contactText']) &&
+             data.keys().size() >= 10 && data.keys().size() <= 11 &&
+             data.heroEyebrow is string && data.heroEyebrow.size() <= 200 &&
+             data.heroTags is string && data.heroTags.size() <= 500 &&
+             data.heroTitle is string && data.heroTitle.size() <= 200 &&
+             data.heroTitleHighlight is string && data.heroTitleHighlight.size() <= 200 &&
+             data.heroSub is string && data.heroSub.size() <= 2000 &&
+             data.currentlyJSON is string && data.currentlyJSON.size() <= 5000 &&
+             data.aboutText is string && data.aboutText.size() <= 10000 &&
+             data.aboutBio is string && data.aboutBio.size() <= 2000 &&
+             data.statsJSON is string && data.statsJSON.size() <= 5000 &&
+             data.contactText is string && data.contactText.size() <= 2000 &&
+             (!('profileImage' in data) || (data.profileImage is string && data.profileImage.size() <= 3000000));
+    }
+
+    match /config/{configId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(configId) && isValidConfig(request.resource.data);
+      allow update: if isAdmin() && isValidId(configId) && isValidConfig(request.resource.data) && (
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['heroEyebrow', 'heroTags', 'heroTitle', 'heroTitleHighlight', 'heroSub', 'currentlyJSON', 'aboutText', 'aboutBio', 'statsJSON', 'contactText', 'profileImage'])
+      );
+      allow delete: if isAdmin() && isValidId(configId);
+    }
+
+    // --- Messages ---
+    function isValidMessage(data) {
+      return data.keys().hasAll(['name', 'email', 'subject', 'message', 'createdAt']) &&
+             data.keys().size() == 5 &&
+             data.name is string && data.name.size() <= 200 &&
+             data.email is string && data.email.size() <= 200 &&
+             data.subject is string && data.subject.size() <= 200 &&
+             data.message is string && data.message.size() <= 5000 &&
+             data.createdAt is string && data.createdAt.size() <= 50;
+    }
+
+    match /messages/{messageId} {
+      allow read: if isAdmin();
+      allow create: if isValidMessage(request.resource.data) && (request.resource.data.createdAt == request.time || request.resource.data.createdAt is string);
+      allow update: if false; 
+      allow delete: if isAdmin();
+    }
+  }
+}

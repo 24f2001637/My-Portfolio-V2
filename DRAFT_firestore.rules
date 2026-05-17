@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email_verified == true && request.auth.token.email == "sahilbind457@gmail.com";
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // --- Resources ---
+    function isValidResource(data) {
+      return data.keys().hasAll(['icon', 'type', 'name', 'description', 'badge', 'actionText', 'actionLink']) &&
+             data.keys().size() == 7 &&
+             data.icon is string && data.icon.size() <= 100 &&
+             data.type is string && data.type.size() <= 100 &&
+             data.name is string && data.name.size() <= 200 &&
+             data.description is string && data.description.size() <= 1000 &&
+             data.badge is string && data.badge.size() <= 50 &&
+             data.actionText is string && data.actionText.size() <= 50 &&
+             data.actionLink is string && data.actionLink.size() <= 500;
+    }
+
+    match /resources/{resourceId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(resourceId) && isValidResource(request.resource.data);
+      allow update: if isAdmin() && isValidId(resourceId) && isValidResource(request.resource.data);
+      allow delete: if isAdmin() && isValidId(resourceId);
+    }
+
+    // --- Blogs ---
+    function isValidBlog(data) {
+      return data.keys().hasAll(['title', 'category', 'readTime', 'excerpt', 'tags', 'icon', 'content']) &&
+             data.keys().size() == 7 &&
+             data.title is string && data.title.size() <= 200 &&
+             data.category is string && data.category.size() <= 100 &&
+             data.readTime is string && data.readTime.size() <= 50 &&
+             data.excerpt is string && data.excerpt.size() <= 1000 &&
+             data.tags is list && data.tags.size() <= 20 && (data.tags.size() == 0 || data.tags[0] is string) &&
+             data.icon is string && data.icon.size() <= 100 &&
+             data.content is string && data.content.size() <= 100000;
+    }
+
+    match /blogs/{blogId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(blogId) && isValidBlog(request.resource.data);
+      allow update: if isAdmin() && isValidId(blogId) && isValidBlog(request.resource.data);
+      allow delete: if isAdmin() && isValidId(blogId);
+    }
+
+    // --- Projects ---
+    function isValidProject(data) {
+      return data.keys().hasAll(['name', 'category', 'description', 'stack', 'status', 'githubLink', 'demoLink', 'icon']) &&
+             data.keys().size() == 8 &&
+             data.name is string && data.name.size() <= 200 &&
+             data.category is string && data.category.size() <= 100 &&
+             data.description is string && data.description.size() <= 1000 &&
+             data.stack is list && data.stack.size() <= 20 && (data.stack.size() == 0 || data.stack[0] is string) &&
+             data.status is string && data.status.size() <= 50 &&
+             data.githubLink is string && data.githubLink.size() <= 500 &&
+             data.demoLink is string && data.demoLink.size() <= 500 &&
+             data.icon is string && data.icon.size() <= 100;
+    }
+
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(projectId) && isValidProject(request.resource.data);
+      allow update: if isAdmin() && isValidId(projectId) && isValidProject(request.resource.data);
+      allow delete: if isAdmin() && isValidId(projectId);
+    }
+  }
+}
