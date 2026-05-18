@@ -1,10 +1,9 @@
 {
-  "projectId": "fundamental-gravity-5cf5x",
-  "appId": "1:372846099537:web:45d6d0a696e7b7c40bcc70",
-  "apiKey": "AIzaSyDw78yETcooU1QDjjf332jb_TFvIfAyZUo",
-  "authDomain": "fundamental-gravity-5cf5x.firebaseapp.com",
-  "firestoreDatabaseId": "ai-studio-671a2c1e-f4dd-4152-9401-0b9064caf119",
-  "storageBucket": "fundamental-gravity-5cf5x.firebasestorage.app",
-  "messagingSenderId": "372846099537",
-  "measurementId": ""
+  "projectId": "my-portfolio-24f2001637",
+  "apiKey": "AIzaSyCkk7k5hWgvR0j3W7wNFrrPrSb6mbO8jwE",
+  "authDomain": "my-portfolio-24f2001637.firebaseapp.com",
+  "storageBucket": "my-portfolio-24f2001637.firebasestorage.app",
+  "messagingSenderId": "1080694705139",
+  "appId": "1:1080694705139:web:2730f765ad418bfdb5a086",
+  "measurementId": "G-JC3Z9D59CY"
 }

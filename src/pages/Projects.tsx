@@ -86,8 +86,8 @@ export default function Projects() {
         {filteredProjects.length === 0 && <div className="col-span-full pt-8 text-center text-theme-text2">No projects found. Check the Admin panel to add some.</div>}
         
         {filteredProjects.map((proj, i) => (
-          <div key={proj.id} className={`${i === 0 ? 'col-span-1 md:col-span-2 flex-col sm:flex-row' : 'flex-col'} bg-theme-card border border-theme-border rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-theme-hover hover:border-theme-accent group flex`}>
-            <div className={`${i === 0 ? 'h-48 sm:h-auto w-full sm:w-1/2 border-b sm:border-b-0 sm:border-r shrink-0' : 'h-48 border-b shrink-0'} bg-theme-bg2 flex items-center justify-center text-4xl border-theme-border relative overflow-hidden`}>
+          <div key={proj.id} className="flex-col bg-theme-card border border-theme-border rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-theme-hover hover:border-theme-accent group flex">
+            <div className="h-48 border-b shrink-0 bg-theme-bg2 flex items-center justify-center text-4xl border-theme-border relative overflow-hidden">
               {proj.coverImage ? (
                 <img src={proj.coverImage} alt={proj.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               ) : (
@@ -104,7 +104,7 @@ export default function Projects() {
               )}
               <div className="absolute inset-0 bg-gradient-to-br from-transparent from-60% to-theme-accent-glow pointer-events-none"></div>
             </div>
-            <div className={`p-5 flex flex-col ${i === 0 ? 'sm:w-1/2 justify-center' : 'flex-1'}`}>
+            <div className="p-5 flex flex-col flex-1">
               <div className="font-mono text-[9px] text-theme-accent uppercase tracking-[0.1em] mb-1.5">{proj.category}</div>
               <div className="font-serif text-xl text-theme-text mb-1.5 leading-tight">{proj.name}</div>
               <div className="text-xs text-theme-text2 leading-relaxed mb-3.5">

@@ -1,20 +1,32 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Sahil Bind — Developer Portfolio
 
-# Run and deploy your AI Studio app
+A modern, highly customizable personal portfolio and blog built with React, Vite, and Firebase. Designed to showcase projects, writings, and resources with a clean, minimalist aesthetic.
 
-This contains everything you need to run your app locally.
+## Features
+- **Dynamic Content:** Projects, Blogs, and Resources are pulled in real-time from Firebase Firestore.
+- **Admin Dashboard:** A secure, built-in `/admin` route allows for full content management (CRUD operations) and portfolio customization without touching the code.
+- **Dark Mode:** Seamless light/dark mode toggling using a custom global state.
+- **Command Palette:** A ⌘K / Ctrl+K search palette to quickly navigate the site.
+- **Responsive Design:** Fully responsive layout built with Tailwind CSS.
 
-View your app in AI Studio: https://ai.studio/apps/671a2c1e-f4dd-4152-9401-0b9064caf119
+## Tech Stack
+- **Frontend:** React, TypeScript, Vite, Tailwind CSS, Lucide React
+- **Backend/Database:** Firebase Firestore
+- **Authentication:** Firebase Auth (Google Sign-In)
+- **Routing:** React Router DOM
+- **SEO:** React Helmet Async
 
-## Run Locally
+## Running Locally
 
-**Prerequisites:**  Node.js
+1. Clone the repository and install dependencies:
+   ```bash
+   npm install
+   ```
+2. Set up your Firebase project and add your credentials to `firebase-applet-config.json`.
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## License
+MIT License - Feel free to use this as inspiration for your own portfolio!

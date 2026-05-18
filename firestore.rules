@@ -6,7 +6,7 @@ service cloud.firestore {
     }
 
     function isAdmin() {
-      return request.auth != null && request.auth.token.email_verified == true && request.auth.token.email == "sahilbind457@gmail.com";
+      return request.auth != null && request.auth.token.email_verified == true && request.auth.token.email == "the.sahilbind@gmail.com";
     }
 
     function isValidId(id) {
@@ -87,18 +87,36 @@ service cloud.firestore {
     }
     // --- Config ---
     function isValidConfig(data) {
-      return data.keys().hasAll(['heroEyebrow', 'heroTags', 'heroTitle', 'heroTitleHighlight', 'heroSub', 'currentlyJSON', 'aboutText', 'aboutBio', 'statsJSON', 'contactText']) &&
-             data.keys().size() >= 10 && data.keys().size() <= 11 &&
+      return data.keys().hasAll([
+        'heroEyebrow', 'heroTags', 'heroTitle', 'heroTitleHighlight', 'heroSub', 'heroGpa', 'heroCurrentlyHeading', 'currentlyJSON',
+        'aboutText', 'aboutBio', 'statsJSON', 'contactText', 'resumeLink', 'socialsJSON',
+        'languagesJSON', 'frameworksJSON', 'mathJSON', 'experienceJSON', 'educationJSON',
+        'expertiseJSON', 'sidebarName', 'sidebarSubtitle', 'certificationsJSON'
+      ]) &&
+             data.keys().size() >= 23 && data.keys().size() <= 24 &&
              data.heroEyebrow is string && data.heroEyebrow.size() <= 200 &&
              data.heroTags is string && data.heroTags.size() <= 500 &&
              data.heroTitle is string && data.heroTitle.size() <= 200 &&
              data.heroTitleHighlight is string && data.heroTitleHighlight.size() <= 200 &&
              data.heroSub is string && data.heroSub.size() <= 2000 &&
+             data.heroGpa is string && data.heroGpa.size() <= 100 &&
+             data.heroCurrentlyHeading is string && data.heroCurrentlyHeading.size() <= 100 &&
              data.currentlyJSON is string && data.currentlyJSON.size() <= 5000 &&
              data.aboutText is string && data.aboutText.size() <= 10000 &&
              data.aboutBio is string && data.aboutBio.size() <= 2000 &&
              data.statsJSON is string && data.statsJSON.size() <= 5000 &&
              data.contactText is string && data.contactText.size() <= 2000 &&
+             data.resumeLink is string && data.resumeLink.size() <= 500 &&
+             data.socialsJSON is string && data.socialsJSON.size() <= 5000 &&
+             data.languagesJSON is string && data.languagesJSON.size() <= 5000 &&
+             data.frameworksJSON is string && data.frameworksJSON.size() <= 5000 &&
+             data.mathJSON is string && data.mathJSON.size() <= 5000 &&
+             data.experienceJSON is string && data.experienceJSON.size() <= 10000 &&
+             data.educationJSON is string && data.educationJSON.size() <= 10000 &&
+             data.expertiseJSON is string && data.expertiseJSON.size() <= 10000 &&
+             data.sidebarName is string && data.sidebarName.size() <= 100 &&
+             data.sidebarSubtitle is string && data.sidebarSubtitle.size() <= 200 &&
+             data.certificationsJSON is string && data.certificationsJSON.size() <= 10000 &&
              (!('profileImage' in data) || (data.profileImage is string && data.profileImage.size() <= 3000000));
     }
 
@@ -106,7 +124,12 @@ service cloud.firestore {
       allow read: if true;
       allow create: if isAdmin() && isValidId(configId) && isValidConfig(request.resource.data);
       allow update: if isAdmin() && isValidId(configId) && isValidConfig(request.resource.data) && (
-        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['heroEyebrow', 'heroTags', 'heroTitle', 'heroTitleHighlight', 'heroSub', 'currentlyJSON', 'aboutText', 'aboutBio', 'statsJSON', 'contactText', 'profileImage'])
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'heroEyebrow', 'heroTags', 'heroTitle', 'heroTitleHighlight', 'heroSub', 'heroGpa', 'heroCurrentlyHeading', 'currentlyJSON',
+          'aboutText', 'aboutBio', 'statsJSON', 'contactText', 'resumeLink', 'socialsJSON',
+          'languagesJSON', 'frameworksJSON', 'mathJSON', 'experienceJSON', 'educationJSON',
+          'expertiseJSON', 'sidebarName', 'sidebarSubtitle', 'certificationsJSON', 'profileImage'
+        ])
       );
       allow delete: if isAdmin() && isValidId(configId);
     }

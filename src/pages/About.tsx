@@ -55,8 +55,10 @@ export default function About() {
   ]);
 
   const educationItems = parseJSON(siteConfig?.educationJSON, [
-     { year: "2024", role: "IIT Madras — BS Data Science & Applications", desc: "Concurrently pursuing BSc. Mathematics at DDU Gorakhpur University" }
+    { year: "2021 — 2025", role: "BS in Data Science and Applications", desc: "Comprehensive study of Mathematics, Statistics, Machine Learning, and Software Development." }
   ]);
+
+  const certificationsItems = parseJSON(siteConfig?.certificationsJSON, []);
 
   const renderIcon = (iconName: string) => {
     if (!iconName) return null;
@@ -92,8 +94,8 @@ export default function About() {
                 S
               </div>
             )}
-            <div className="font-serif text-[22px] text-theme-text mb-1">Sahil</div>
-            <div className="font-mono text-[11px] text-theme-accent mb-3">@sahilbind · IIT Madras'28</div>
+            <div className="font-serif text-[22px] text-theme-text mb-1">{siteConfig?.sidebarName || "Sahil"}</div>
+            <div className="font-mono text-[11px] text-theme-accent mb-3">{siteConfig?.sidebarSubtitle || "@sahilbind · IIT Madras'28"}</div>
             <div className="text-xs text-theme-text2 leading-[1.6] mb-4">
               {siteConfig?.aboutBio || "Data Scientist & Developer building at the intersection of AI, mathematics, and clean code. INSPIRE SHE Scholar. Passionate about making complex ideas accessible."}
             </div>
@@ -178,6 +180,34 @@ export default function About() {
               ))}
             </div>
           </div>
+          
+          {certificationsItems && certificationsItems.length > 0 && (
+            <div className="w-full mt-12 pt-12 border-t border-theme-border">
+              <div className="flex items-baseline justify-between mb-8 pb-4 border-b border-theme-border">
+                <div>
+                  <div className="font-mono text-[10px] text-theme-text3 tracking-[0.1em] uppercase">Achievements</div>
+                  <h2 className="font-serif text-3xl tracking-[-0.02em] text-theme-text">Certifications & Awards</h2>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {certificationsItems.map((item: any, i: number) => (
+                  <div key={`cert-${i}`} className="bg-theme-card border border-theme-border rounded-xl p-6 group hover:border-theme-accent transition-colors duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded bg-theme-bg2 border border-theme-border flex items-center justify-center shrink-0">
+                        <LucideIcons.Award className="w-5 h-5 text-theme-accent" />
+                      </div>
+                      <div>
+                        <div className="font-mono text-[10px] text-theme-accent mb-1">{item.year}</div>
+                        <h4 className="font-serif text-lg text-theme-text leading-tight mb-1">{item.role}</h4>
+                        <p className="text-xs text-theme-text2">{item.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
