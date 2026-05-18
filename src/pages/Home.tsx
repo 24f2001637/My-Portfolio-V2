@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <>
       <SEO 
-        title="Sahil Bind — Data Scientist, ML Engineer & Full-stack Developer"
+        title="Sahil Bind - IIT Madras BS Degree"
         description="Explore the portfolio of Sahil Bind, a Data Scientist and Developer specialized in AI, Machine Learning, and modern Web Technologies. Discover projects, writings, and resources."
         url="https://sahilbind.in"
       />
