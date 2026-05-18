@@ -4,7 +4,7 @@ import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut, User 
 import { collection, onSnapshot, doc, setDoc, deleteDoc, getDocs, updateDoc } from "firebase/firestore";
 import { toast } from "sonner";
 import { compressImage } from "../lib/utils";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 
 const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, setField: (v: string) => void) => {
   if (e.target.files && e.target.files[0]) {
@@ -94,10 +94,11 @@ function Admin() {
   // Admin Dashboard
   return (
     <>
-      <Helmet>
-        <title>Admin Dashboard | Sahil Bind</title>
-        <meta name="robots" content="noindex" />
-      </Helmet>
+      <SEO 
+        title="Admin Dashboard | Sahil Bind"
+        description="Admin dashboard for managing portfolio content."
+        noindex={true}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-8 pb-20 overflow-x-hidden w-full">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-theme-border pb-6 gap-4 w-full">
         <div>

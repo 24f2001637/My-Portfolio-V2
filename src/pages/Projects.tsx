@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Search, Github, ExternalLink } from "lucide-react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db, handleFirestoreError, OperationType } from "../lib/firebase";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -40,16 +40,11 @@ export default function Projects() {
 
   return (
     <>
-      <Helmet>
-        <title>Projects Portfolio | Sahil Bind — Data Science & Web Apps</title>
-        <meta name="description" content="Explore a curated collection of projects by Sahil Bind, ranging from Machine Learning models and Data Analysis to full-stack Web Applications. See how AI and data drive real-world solutions." />
-        <meta property="og:title" content="Projects Portfolio — Sahil Bind" />
-        <meta property="og:description" content="A showcase of AI, Data Science, and Web Development projects by Sahil Bind." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sahil.bind/projects" />
-        <meta name="twitter:title" content="Projects Portfolio | Sahil Bind" />
-        <meta name="twitter:description" content="Explore Sahil's latest projects in ML, Data Science, and Web Development." />
-      </Helmet>
+      <SEO 
+        title="Projects Portfolio | Sahil Bind — Data Science & Web Apps"
+        description="Explore a curated collection of projects by Sahil Bind, ranging from Machine Learning models and Data Analysis to full-stack Web Applications. See how AI and data drive real-world solutions."
+        url="https://sahilbind.in/projects"
+      />
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20 fade-in">
         <div className="flex flex-col mb-10 pb-5 border-b border-theme-border">
         <div className="font-mono text-[10px] text-theme-text3 tracking-[0.1em] uppercase">Portfolio</div>

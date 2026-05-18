@@ -5,7 +5,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db, handleFirestoreError, OperationType } from "../lib/firebase";
 import { Link } from "react-router-dom";
 import { formatDate } from "../lib/utils";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 
 export default function Writings() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -43,16 +43,11 @@ export default function Writings() {
 
   return (
     <>
-      <Helmet>
-        <title>Writings & Blog | Sahil Bind — Insights on AI and Data Science</title>
-        <meta name="description" content="Read articles, tutorials, and thoughts by Sahil Bind on artificial intelligence, data science, and web development. Stay updated with the latest trends and projects." />
-        <meta property="og:title" content="Writings & Blog — Sahil Bind" />
-        <meta property="og:description" content="Insights and articles on AI, Data Science, and technology by Sahil Bind." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sahil.bind/writings" />
-        <meta name="twitter:title" content="Writings & Blog | Sahil Bind" />
-        <meta name="twitter:description" content="Read Sahil's latest thoughts and guides on tech and data science." />
-      </Helmet>
+      <SEO 
+        title="Writings & Blog | Sahil Bind — Insights on AI and Data Science"
+        description="Read articles, tutorials, and thoughts by Sahil Bind on artificial intelligence, data science, and web development. Stay updated with the latest trends and projects."
+        url="https://sahilbind.in/writings"
+      />
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20 fade-in">
         <div className="flex flex-col mb-10 pb-5 border-b border-theme-border">
         <div className="font-mono text-[10px] text-theme-text3 tracking-[0.1em] uppercase">Writing</div>

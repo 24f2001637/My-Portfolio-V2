@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db, handleFirestoreError, OperationType } from "../lib/firebase";
 import { formatDate } from "../lib/utils";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 
 export default function Home() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -80,19 +80,11 @@ export default function Home() {
 
   return (
     <>
-      <Helmet>
-        <title>Sahil Bind — Data Scientist, ML Engineer & Full-stack Developer</title>
-        <meta name="description" content="Explore the portfolio of Sahil Bind, a Data Scientist and Developer specialized in AI, Machine Learning, and modern Web Technologies. Discover projects, writings, and resources." />
-        <meta property="og:title" content="Sahil Bind — Data Scientist & Developer" />
-        <meta property="og:description" content="Portfolio and insights on AI, Machine Learning, and Web Development by Sahil Bind." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sahil.bind" />
-        <meta property="og:image" content="/og-image.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Sahil Bind — Data Scientist & Developer" />
-        <meta name="twitter:description" content="Portfolio and insights on AI, Machine Learning, and Web Development by Sahil Bind." />
-        <meta name="twitter:image" content="/og-image.png" />
-      </Helmet>
+      <SEO 
+        title="Sahil Bind — Data Scientist, ML Engineer & Full-stack Developer"
+        description="Explore the portfolio of Sahil Bind, a Data Scientist and Developer specialized in AI, Machine Learning, and modern Web Technologies. Discover projects, writings, and resources."
+        url="https://sahilbind.in"
+      />
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Hero */}
         <section className="min-h-screen flex flex-col relative pt-8 pb-16 lg:pt-12">

@@ -3,7 +3,7 @@ import { Search } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db, handleFirestoreError, OperationType } from "../lib/firebase";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 
 export default function Resources() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -41,16 +41,11 @@ export default function Resources() {
 
   return (
     <>
-      <Helmet>
-        <title>Curated Resources for Data Science & AI | Sahil Bind</title>
-        <meta name="description" content="Access a curated hub of learning resources, guides, and materials for Data Science, Artificial Intelligence, and Software Development, handpicked and organized by Sahil Bind." />
-        <meta property="og:title" content="Curated Resources — Sahil Bind" />
-        <meta property="og:description" content="A knowledge hub of learning materials and guides for tech enthusiasts by Sahil Bind." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sahil.bind/resources" />
-        <meta name="twitter:title" content="Curated Resources | Sahil Bind" />
-        <meta name="twitter:description" content="Explore handcrafted resources for learning Data Science and AI." />
-      </Helmet>
+      <SEO 
+        title="Curated Resources for Data Science & AI | Sahil Bind"
+        description="Access a curated hub of learning resources, guides, and materials for Data Science, Artificial Intelligence, and Software Development, handpicked and organized by Sahil Bind."
+        url="https://sahilbind.in/resources"
+      />
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20 fade-in">
         <div className="flex flex-col mb-10 pb-5 border-b border-theme-border">
         <div className="font-mono text-[10px] text-theme-text3 tracking-[0.1em] uppercase">Knowledge Hub</div>

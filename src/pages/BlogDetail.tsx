@@ -7,7 +7,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { toast } from "sonner";
 import { formatDate } from "../lib/utils";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -71,9 +71,7 @@ export default function BlogDetail() {
   if (!blog) {
     return (
       <div className="max-w-3xl mx-auto px-6 pt-8 pb-20 fade-in text-center text-theme-text2">
-        <Helmet>
-          <title>Blog Not Found | Portfolio</title>
-        </Helmet>
+        <SEO title="Blog Not Found | Portfolio" description="Blog post not found" />
         Blog not found.
         <div className="mt-4">
           <Link to="/blogs" className="text-theme-accent hover:underline">← Back to writings</Link>
@@ -84,19 +82,13 @@ export default function BlogDetail() {
 
   return (
     <>
-      <Helmet>
-        <title>{blog.title} | Sahil Bind — Blog</title>
-        <meta name="description" content={blog.excerpt || `Read "${blog.title}" by Sahil Bind, exploring topics in Data Science, AI, and development.`} />
-        <meta property="og:title" content={`${blog.title} | Sahil Bind — Blog`} />
-        <meta property="og:description" content={blog.excerpt || `Dive into this article about ${blog.category || 'tech'} by Sahil Bind.`} />
-        {blog.coverImage && <meta property="og:image" content={blog.coverImage} />}
-        <meta property="og:type" content="article" />
-        <meta property="article:published_time" content={blog.date} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={blog.title} />
-        <meta name="twitter:description" content={blog.excerpt || `Read this blog post by Sahil Bind.`} />
-        {blog.coverImage && <meta name="twitter:image" content={blog.coverImage} />}
-      </Helmet>
+      <SEO 
+        title={`${blog.title} | Sahil Bind — Blog`}
+        description={blog.excerpt || `Read "${blog.title}" by Sahil Bind, exploring topics in Data Science, AI, and development.`}
+        type="article"
+        url={`https://sahilbind.in/blogs/${blog.id}`}
+        image={blog.coverImage}
+      />
       <div 
         className="fixed top-[60px] left-0 h-[2px] bg-theme-accent z-[99] transition-all duration-150"
         style={{ width: `${scrollProgress * 100}%` }}

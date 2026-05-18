@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import * as LucideIcons from "lucide-react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 
 export default function About() {
   const [siteConfig, setSiteConfig] = useState<any>(null);
@@ -72,16 +72,11 @@ export default function About() {
 
   return (
     <>
-      <Helmet>
-        <title>About Sahil Bind — Data Scientist & AI Developer</title>
-        <meta name="description" content="Learn more about Sahil Bind, a Data Science student at IIT Madras with a passion for building AI-driven solutions and elegant web experiences. Explore my background, skills, and journey." />
-        <meta property="og:title" content="About Sahil Bind — Data Scientist & AI Developer" />
-        <meta property="og:description" content="Discover the journey, skills, and background of Sahil Bind, a Data Scientist and Developer." />
-        <meta property="og:type" content="profile" />
-        <meta property="og:url" content="https://sahil.bind/about" />
-        <meta name="twitter:title" content="About Sahil Bind" />
-        <meta name="twitter:description" content="Learn more about Sahil's work in Data Science and Development." />
-      </Helmet>
+      <SEO 
+        title="About Sahil Bind — Data Scientist & AI Developer"
+        description="Learn more about Sahil Bind, a Data Science student at IIT Madras with a passion for building AI-driven solutions and elegant web experiences. Explore my background, skills, and journey."
+        url="https://sahilbind.in/about"
+      />
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-12 items-start">
         {/* Sidebar */}
