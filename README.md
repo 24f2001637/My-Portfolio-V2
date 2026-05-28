@@ -1,32 +1,69 @@
 # Sahil Bind - Developer Portfolio
 
-A modern, highly customizable personal portfolio and blog built with React, Vite, and Firebase. Designed to showcase projects, writings, and resources with a clean, minimalist aesthetic.
+A modern personal portfolio and blog built with React, TypeScript, Vite, Tailwind CSS, and Firebase.
+
+## Overview
+
+This project powers a developer portfolio with dynamic sections for projects, writings, and resources.  
+Content is managed through Firebase and can be updated via a built-in admin route.
 
 ## Features
-- **Dynamic Content:** Projects, Blogs, and Resources are pulled in real-time from Firebase Firestore.
-- **Admin Dashboard:** A secure, built-in `/admin` route allows for full content management (CRUD operations) and portfolio customization without touching the code.
-- **Dark Mode:** Seamless light/dark mode toggling using a custom global state.
-- **Command Palette:** A ⌘K / Ctrl+K search palette to quickly navigate the site.
-- **Responsive Design:** Fully responsive layout built with Tailwind CSS.
+
+- Dynamic content from Firebase Firestore (Projects, Writings, Resources)
+- Admin dashboard at `/admin` for content management
+- Light and dark mode support
+- Command palette (`⌘K` / `Ctrl+K`) for quick navigation
+- Responsive UI with Tailwind CSS
+- SEO metadata handling and sitemap generation
 
 ## Tech Stack
-- **Frontend:** React, TypeScript, Vite, Tailwind CSS, Lucide React
-- **Backend/Database:** Firebase Firestore
-- **Authentication:** Firebase Auth (Google Sign-In)
-- **Routing:** React Router DOM
-- **SEO:** React Helmet Async
 
-## Running Locally
+React, TypeScript, Vite, Tailwind CSS, Firebase Firestore, Firebase Auth, React Router DOM, React Helmet Async, Lucide React, Express, Google GenAI SDK
 
-1. Clone the repository and install dependencies:
+## Prerequisites
+
+- Node.js (LTS recommended)
+- npm
+- Firebase project credentials
+
+## Getting Started
+
+1. Install dependencies:
+
    ```bash
    npm install
    ```
-2. Set up your Firebase project and add your credentials to `firebase-applet-config.json`.
+
+2. Configure Firebase:
+   - Add your Firebase values to `firebase-applet-config.json`
+   - Optionally copy `.env.example` to `.env` and fill required values
+
 3. Start the development server:
+
    ```bash
    npm run dev
    ```
 
+## Available Scripts
+
+- `npm run dev` - Start local dev server on port 3000
+- `npm run build` - Generate sitemap and build production assets
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run TypeScript type-check (`tsc --noEmit`)
+- `npm run clean` - Remove build artifacts
+
+## Project Structure
+
+- `src/pages` - Route-level pages (Home, Projects, Writings, etc.)
+- `src/components` - Reusable UI and layout components
+- `src/lib` - Shared utilities and Firebase setup
+- `scripts/generate-sitemap.js` - Sitemap generation script used during build
+- `public` - Static assets (`robots.txt`, `sitemap.xml`, favicon)
+
+## Deployment
+
+The project includes `vercel.json` for Vercel deployment and Firebase-related config files for backend services.
+
 ## License
-MIT License - Feel free to use this as inspiration for your own portfolio!
+
+MIT License — feel free to use this as inspiration for your own portfolio.
