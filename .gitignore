@@ -6,3 +6,26 @@ coverage/
 *.log
 .env*
 !.env.example
+# Added by code-review-graph
+.code-review-graph/
+
+# IDE and Editors
+.vscode/
+
+# AI Coding Assistants & Configurations
+.claude/
+.cursor/
+.gemini/
+.qoder/
+.kiro/
+.cursorrules
+.windsurfrules
+.mcp.json
+.opencode.json
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+QODER.md
+
+# Knowledge Graph Instructions
+.github/code-review-graph.instruction.md

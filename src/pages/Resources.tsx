@@ -1,9 +1,18 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
-import * as LucideIcons from "lucide-react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db, handleFirestoreError, OperationType } from "../lib/firebase";
 import SEO from "../components/SEO";
+import { lazy, Suspense } from "react";
+
+const LazyDynamicIcon = lazy(() => import("../components/DynamicIcon"));
+function DynamicIcon(props: any) {
+  return (
+    <Suspense fallback={<div className="w-10 h-10 bg-theme-border animate-pulse rounded" />}>
+      <LazyDynamicIcon {...props} />
+    </Suspense>
+  );
+}
 
 export default function Resources() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -49,7 +58,7 @@ export default function Resources() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20 fade-in">
         <div className="flex flex-col mb-10 pb-5 border-b border-theme-border">
         <div className="font-mono text-[10px] text-theme-text3 tracking-[0.1em] uppercase">Knowledge Hub</div>
-        <h2 className="font-serif text-4xl tracking-[-0.02em] text-theme-text">Curated <em className="italic text-theme-accent">Resources</em></h2>
+        <h1 className="font-serif text-4xl tracking-[-0.02em] text-theme-text">Curated <em className="italic text-theme-accent">Resources</em></h1>
       </div>
 
       <div className="flex items-center gap-2.5 bg-theme-card border border-theme-border rounded-md px-3.5 py-2 mb-6 shadow-theme-card transition-colors duration-200 focus-within:border-theme-accent">
@@ -91,14 +100,7 @@ export default function Resources() {
             <div className="p-6 flex flex-col gap-2.5 h-full">
               {res.icon && !res.coverImage && (
                 <div className="w-10 h-10 rounded-lg bg-theme-accent-bg border border-theme-border flex items-center justify-center shrink-0 text-theme-text text-xl">
-                  {((LucideIcons as any)[res.icon]) ? 
-                    (() => {
-                      const IconComp = (LucideIcons as any)[res.icon];
-                      return <IconComp size={20} className="text-theme-text" />;
-                    })()
-                    :
-                    <span>{res.icon}</span>
-                  }
+                  <DynamicIcon name={res.icon} size={20} className="text-theme-text" />
                 </div>
               )}
               <div className="font-mono text-[9px] text-theme-text3 uppercase tracking-[0.1em]">{res.type}</div>

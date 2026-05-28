@@ -180,7 +180,7 @@ function ConfigAdmin({ activeGroup }: { activeGroup: string }) {
         setHeroTitleHighlight(c.heroTitleHighlight || "");
         setHeroSub(c.heroSub || "");
         setHeroGpa(c.heroGpa || "3.8 GPA");
-        setHeroCurrentlyHeading(c.heroCurrentlyHeading || "Now — Live");
+        setHeroCurrentlyHeading(c.heroCurrentlyHeading || "Now - Live");
         setCurrentlyJSON(c.currentlyJSON || "");
         setAboutText(c.aboutText || "");
         setAboutBio(c.aboutBio || "");
@@ -206,8 +206,8 @@ function ConfigAdmin({ activeGroup }: { activeGroup: string }) {
           heroTitleHighlight: "Data Scientist",
           heroSub: "I'm Sahil Bind — a data science student at IIT Madras who builds things at the intersection of mathematics, AI, and software engineering.",
           heroGpa: "3.8 GPA",
-          heroCurrentlyHeading: "Now — Live",
-          currentlyJSON: "[\n  { \"icon\": \"Hammer\", \"title\": \"Building\", \"desc\": \"HMSCare — Hospital Mgmt System\" },\n  { \"icon\": \"BookOpen\", \"title\": \"Studying\", \"desc\": \"GenAI & Deep Learning @ IITM\" },\n  { \"icon\": \"MapPin\", \"title\": \"Location\", \"desc\": \"Varanasi, India\" }\n]",
+          heroCurrentlyHeading: "Now - Live",
+          currentlyJSON: "[\n  { \"icon\": \"Hammer\", \"title\": \"Building\", \"desc\": \"HMSCare - Hospital Mgmt System\" },\n  { \"icon\": \"BookOpen\", \"title\": \"Studying\", \"desc\": \"GenAI & Deep Learning @ IITM\" },\n  { \"icon\": \"MapPin\", \"title\": \"Location\", \"desc\": \"Varanasi, India\" }\n]",
           aboutText: "",
           aboutBio: "Data Scientist & Developer building at the intersection of AI, mathematics, and clean code. INSPIRE SHE Scholar. Passionate about making complex ideas accessible.",
           statsJSON: "[]",
@@ -219,7 +219,7 @@ function ConfigAdmin({ activeGroup }: { activeGroup: string }) {
           frameworksJSON: "[\n  { \"icon\": \"Wrench\", \"name\": \"Flask\" },\n  { \"icon\": \"LayoutTemplate\", \"name\": \"Vue.js\" },\n  { \"icon\": \"Flame\", \"name\": \"PyTorch\" }\n]",
           mathJSON: "[\n  { \"icon\": \"Calculator\", \"name\": \"Calculus\" },\n  { \"icon\": \"Grid3X3\", \"name\": \"Linear Algebra\" }\n]",
           experienceJSON: "[\n  { \"year\": \"2025\", \"role\": \"Campus Partner · Perplexity AI\", \"desc\": \"Introduced AI tools to the university community, supporting research workflows.\" },\n  { \"year\": \"2025\", \"role\": \"Subject Matter Expert · Chegg Inc.\", \"desc\": \"Helped students with subject-specific queries, teaching and explaining complex concepts.\" }\n]",
-          educationJSON: "[\n  { \"year\": \"2024\", \"role\": \"IIT Madras — BS Data Science & Applications\", \"desc\": \"Concurrently pursuing BSc. Mathematics at DDU Gorakhpur University\" }\n]",
+          educationJSON: "[\n  { \"year\": \"2024\", \"role\": \"IIT Madras - BS Data Science & Applications\", \"desc\": \"Concurrently pursuing BSc. Mathematics at DDU Gorakhpur University\" }\n]",
           expertiseJSON: "[\n  { \"icon\": \"Brain\", \"title\": \"AI & Machine Learning\", \"desc\": \"Building intelligent systems using deep learning, NLP, and computer vision. From predictive modeling to generative AI applications.\", \"skills\": [\"PyTorch\", \"TensorFlow\", \"Scikit-Learn\", \"LLMs\", \"OpenCV\"] },\n  { \"icon\": \"Database\", \"title\": \"Data Science\", \"desc\": \"Extracting actionable insights from complex datasets. Expertise in statistical analysis, data visualization, and pipeline engineering.\", \"skills\": [\"Python\", \"Pandas\", \"SQL\", \"Tableau\", \"Spark\"] },\n  { \"icon\": \"Code2\", \"title\": \"Full-Stack Dev\", \"desc\": \"Developing scalable web applications and robust APIs. Creating seamless user experiences combined with powerful backend architecture.\", \"skills\": [\"React\", \"TypeScript\", \"Node.js\", \"Next.js\", \"Tailwind CSS\"] }\n]",
           sidebarName: "Sahil",
           sidebarSubtitle: "@sahilbind · IIT Madras'28",
@@ -335,13 +335,13 @@ function ConfigAdmin({ activeGroup }: { activeGroup: string }) {
               </label>
             </Accordion>
 
-            <Accordion title='"Now — Live" Status'>
-              <label className="flex flex-col gap-1 md:col-span-2"><span className="text-sm text-theme-text2">"Now — Live" Heading</span>
-                <input required value={heroCurrentlyHeading} onChange={e=>setHeroCurrentlyHeading(e.target.value)} placeholder="Now — Live" className="p-2 rounded border border-theme-border text-theme-text bg-theme-bg2" />
+            <Accordion title='"Now - Live" Status'>
+              <label className="flex flex-col gap-1 md:col-span-2"><span className="text-sm text-theme-text2">"Now - Live" Heading</span>
+                <input required value={heroCurrentlyHeading} onChange={e=>setHeroCurrentlyHeading(e.target.value)} placeholder="Now - Live" className="p-2 rounded border border-theme-border text-theme-text bg-theme-bg2" />
               </label>
               <div className="md:col-span-2 mt-2">
                 <JSONListBuilder
-                  title='"Now — Live" Items'
+                  title='"Now - Live" Items'
                   jsonStr={currentlyJSON}
                   onChange={setCurrentlyJSON}
                   defaultNewItem={{ icon: "", title: "", desc: "" }}
@@ -556,41 +556,27 @@ function MarkdownToolbar({ value, onChange }: { value: string, onChange: (v: str
   );
 }
 
-import * as LucideIcons from "lucide-react";
+import DynamicIcon, { ALL_ICONS } from "../components/DynamicIcon";
 
 const COMMON_ICONS = [
-  // Existing
   "Brain", "Database", "Code2", "Hammer", "BookOpen", "MapPin", "Award", "Calculator", "Grid3X3",
   "Code", "FileJson", "LayoutTemplate", "Flame", "Wrench", "Mail", "Github", "Linkedin", "Twitter",
   "ArrowRight", "ExternalLink", "Quote", "MessageSquareQuote", "Terminal", "Cpu", "Globe", "Briefcase", "User",
   "Rocket", "Heart", "Star", "Zap", "Shield", "Palette", "Camera", "Music", "Monitor", "Smartphone",
   "Server", "Cloud", "Lock", "Eye", "Pen", "FileText", "Folder", "Download", "Upload", "RefreshCw",
-  
-  // UI Additions
-  "Search", "Home", "Settings", "Tool", "PenTool", "Laptop", "Tablet", "Coffee", "Compass", "Map",
-  "Navigation", "Flag", "Check", "CheckCircle", "XCircle", "AlertCircle", "Info", "HelpCircle",
-  "Phone", "MessageCircle", "Send", "Inbox", "Book", "Bookmark", "Tag", "Archive", "UserPlus", "Users",
-  "Calendar", "Clock", "ThumbsUp", "TrendingUp", "Activity", "Target", "Crosshair", "Wifi", "Battery",
-  "Sun", "Moon", "CloudLightning", "Droplet", "Wind", "Umbrella", "Layers", "Box", "Grid", "List",
-  "Link", "Link2", "File", "Files", "FolderPlus", "FolderMinus", "Save", "Trash", "Trash2", "Edit",
-  "Edit2", "Edit3", "Scissors", "Copy", "Clipboard", "Paperclip", "Maximize", "Minimize", "ZoomIn",
-  "ZoomOut", "Plus", "Minus", "ArrowUp", "ArrowDown", "ArrowLeft", "ChevronUp", "ChevronDown",
-  "ChevronLeft", "ChevronRight", "Menu", "MoreHorizontal", "MoreVertical", "HardDrive", "Mouse",
-  "Keyboard", "Printer", "Tv", "Watch", "Bluetooth", "Speaker", "Image", "Video", "Mic", "Play",
-  
-  // Tech, Social, & Developer specific
-  "Instagram", "Youtube", "Twitch", "Figma", "Framer", "Slack", "Trello", "Codepen", "Gitlab", "Bitbucket", 
-  "Chrome", "Safari", "Apple", "Android", "Command", "Binary", "CircuitBoard", "Network", "Webhook", 
-  "Blocks", "Brackets", "Bug", "FileCode", "Router", "Usb", "Key", "Unlock", "Fingerprint", "Scan", "QrCode", 
-  "Bot", "Microscope", "Beaker", "FlaskConical", "Magnet", "Atom", "BrainCircuit", "Regex", "Variable"
+  "Search", "Home", "Settings", "Phone", "MessageCircle", "Send", "Inbox", "Book", "Bookmark", "Tag"
 ];
 
 function IconPicker({ value, onChange }: { value: string, onChange: (v: string) => void }) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   
-  const filtered = COMMON_ICONS.filter(name => name.toLowerCase().includes(search.toLowerCase()));
-  const SelectedIcon = value ? (LucideIcons as any)[value] : null;
+  const filtered = useMemo(() => {
+    if (!search) {
+      return COMMON_ICONS;
+    }
+    return ALL_ICONS.filter(name => name.toLowerCase().includes(search.toLowerCase())).slice(0, 100);
+  }, [search]);
 
   return (
     <div className="relative">
@@ -599,9 +585,9 @@ function IconPicker({ value, onChange }: { value: string, onChange: (v: string) 
         onClick={() => setOpen(!open)}
         className="w-full p-2 rounded border border-theme-border text-theme-text bg-theme-bg2 text-xs flex items-center gap-2 hover:bg-theme-bg transition-colors"
       >
-        {SelectedIcon ? (
+        {value ? (
           <>
-            <SelectedIcon size={14} className="text-theme-accent shrink-0" />
+            <DynamicIcon name={value} size={14} className="text-theme-accent shrink-0" />
             <span>{value}</span>
           </>
         ) : (
@@ -622,8 +608,6 @@ function IconPicker({ value, onChange }: { value: string, onChange: (v: string) 
           </div>
           <div className="grid grid-cols-6 gap-1 p-2 overflow-y-auto">
             {filtered.map(name => {
-              const Icon = (LucideIcons as any)[name];
-              if (!Icon) return null;
               return (
                 <button
                   key={name}
@@ -632,7 +616,7 @@ function IconPicker({ value, onChange }: { value: string, onChange: (v: string) 
                   onClick={() => { onChange(name); setOpen(false); setSearch(""); }}
                   className={`w-full aspect-square rounded flex items-center justify-center transition-colors ${value === name ? 'bg-theme-accent text-theme-bg' : 'hover:bg-theme-bg2 text-theme-text2 hover:text-theme-text'}`}
                 >
-                  <Icon size={16} />
+                  <DynamicIcon name={name} size={16} />
                 </button>
               );
             })}
@@ -737,11 +721,10 @@ function JSONListBuilder({
       
       <div className="flex flex-col gap-2">
         {items.map((item: any, idx: number) => {
-          const ItemIcon = item.icon ? (LucideIcons as any)[item.icon] : null;
           return (
             <div key={idx} className="flex items-start justify-between gap-2 p-3 rounded border border-theme-border bg-theme-bg2 text-xs">
               <div className="flex gap-2 flex-1 overflow-hidden items-start">
-                {ItemIcon && <ItemIcon size={16} className="text-theme-accent shrink-0 mt-0.5" />}
+                {item.icon && <DynamicIcon name={item.icon} size={16} className="text-theme-accent shrink-0 mt-0.5" />}
                 <div className="flex-1 overflow-hidden">
                   <div className="text-theme-text text-[11px] font-medium">{item.title || item.name || item.role || item.label || Object.values(item)[0] as string}</div>
                   {(item.desc || item.text || item.val) && <div className="text-theme-text3 text-[10px] mt-0.5 truncate">{item.desc || item.text || item.val}</div>}

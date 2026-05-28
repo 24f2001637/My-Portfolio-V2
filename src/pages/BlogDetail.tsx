@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Share2 } from "lucide-react";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -8,6 +8,15 @@ import remarkGfm from "remark-gfm";
 import { toast } from "sonner";
 import { formatDate } from "../lib/utils";
 import SEO from "../components/SEO";
+
+const LazyDynamicIcon = lazy(() => import("../components/DynamicIcon"));
+function DynamicIcon(props: any) {
+  return (
+    <Suspense fallback={<div className="w-16 h-16 bg-theme-border animate-pulse rounded" />}>
+      <LazyDynamicIcon {...props} />
+    </Suspense>
+  );
+}
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -83,7 +92,7 @@ export default function BlogDetail() {
   return (
     <>
       <SEO 
-        title={`${blog.title} | Sahil Bind — Blog`}
+        title={`${blog.title} | Sahil Bind - Blog`}
         description={blog.excerpt || `Read "${blog.title}" by Sahil Bind, exploring topics in Data Science, AI, and development.`}
         type="article"
         url={`https://sahilbind.in/blogs/${blog.id}`}
@@ -120,7 +129,7 @@ export default function BlogDetail() {
           {blog.coverImage ? (
             <img src={blog.coverImage} alt={blog.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           ) : (
-            <span>{blog.icon}</span>
+            <DynamicIcon name={blog.icon} size={64} className="text-theme-text" />
           )}
         </div>
         

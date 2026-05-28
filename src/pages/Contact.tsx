@@ -1,13 +1,18 @@
-import { ArrowRight, ArrowDown, Mail, Github, Linkedin, Twitter, FileText, MessageCircle, Globe, Youtube, Monitor, Link as LinkIcon, Instagram, Facebook } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { ArrowRight, ArrowDown, FileText } from "lucide-react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
 import { db, handleFirestoreError, OperationType } from "../lib/firebase";
 import { toast } from "sonner";
 import SEO from "../components/SEO";
 
-const IconMap: Record<string, React.ElementType> = {
-  Mail, Github, Linkedin, Twitter, MessageCircle, Globe, Youtube, Monitor, Link: LinkIcon, Instagram, Facebook
-};
+const LazyDynamicIcon = lazy(() => import("../components/DynamicIcon"));
+function DynamicIcon(props: any) {
+  return (
+    <Suspense fallback={<div className="w-4 h-4 bg-theme-border animate-pulse rounded" />}>
+      <LazyDynamicIcon {...props} />
+    </Suspense>
+  );
+}
 
 export default function Contact() {
   const [siteConfig, setSiteConfig] = useState<any>(null);
@@ -67,26 +72,25 @@ export default function Contact() {
   return (
     <>
       <SEO 
-        title="Get In Touch | Sahil Bind — Data Scientist & Developer"
+        title="Get In Touch | Sahil Bind - Data Scientist & Developer"
         description="Interested in collaborating on a Data Science project or building a modern web application? Get in touch with Sahil Bind for inquiries, opportunities, or just a friendly chat."
         url="https://sahilbind.in/contact"
       />
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20 fade-in">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         <div>
-          <h2 className="font-serif text-[40px] leading-[1.1] text-theme-text mb-5 tracking-[-0.02em]">
+          <h1 className="font-serif text-[40px] leading-[1.1] text-theme-text mb-5 tracking-[-0.02em]">
             Let's build<br />something <em className="italic text-theme-accent">useful</em><br />together.
-          </h2>
+          </h1>
           <p className="text-[14px] text-theme-text2 leading-[1.7] mb-7">
             {siteConfig?.contactText || "I'm always open to interesting conversations, collaboration opportunities, or just a good chat about math and AI. Don't hesitate to reach out."}
           </p>
           <div className="flex flex-col gap-2.5">
             {socials.map((link, i) => {
-              const IconComponent = IconMap[link.icon] || LinkIcon;
               return (
                 <a href={link.href} target="_blank" rel="noreferrer" key={i} className="flex items-center gap-3 p-3.5 bg-theme-card border border-theme-border rounded-lg cursor-pointer transition-all duration-200 shadow-theme-card hover:border-theme-accent hover:translate-x-1 group">
                   <div className="w-8 h-8 rounded-md bg-theme-accent-bg flex items-center justify-center text-[15px] text-theme-text">
-                    <IconComponent size={16}/>
+                    <DynamicIcon name={link.icon} size={16}/>
                   </div>
                   <div className="flex-1">
                     <div className="text-[12px] font-semibold text-theme-text">{link.label}</div>

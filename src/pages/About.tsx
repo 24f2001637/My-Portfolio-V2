@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import * as LucideIcons from "lucide-react";
+import { Github, Linkedin, Mail, Award, Hammer, BookOpen, MapPin } from "lucide-react";
 import SEO from "../components/SEO";
+import { lazy, Suspense } from "react";
+const LazyDynamicIcon = lazy(() => import("../components/DynamicIcon"));
+function DynamicIcon(props: any) {
+  return (
+    <Suspense fallback={<div className="w-4 h-4 shrink-0" />}>
+      <LazyDynamicIcon {...props} />
+    </Suspense>
+  );
+}
 
 export default function About() {
   const [siteConfig, setSiteConfig] = useState<any>(null);
@@ -55,25 +64,23 @@ export default function About() {
   ]);
 
   const educationItems = parseJSON(siteConfig?.educationJSON, [
-    { year: "2021 — 2025", role: "BS in Data Science and Applications", desc: "Comprehensive study of Mathematics, Statistics, Machine Learning, and Software Development." }
+    { year: "2021 - 2025", role: "BS in Data Science and Applications", desc: "Comprehensive study of Mathematics, Statistics, Machine Learning, and Software Development." }
   ]);
 
   const certificationsItems = parseJSON(siteConfig?.certificationsJSON, []);
 
   const renderIcon = (iconName: string) => {
     if (!iconName) return null;
-    if (iconName === "🏗" || iconName === "Building") return <LucideIcons.Hammer size={12}/>;
-    if (iconName === "📖" || iconName === "Studying") return <LucideIcons.BookOpen size={12}/>;
-    if (iconName === "🎯" || iconName === "Location") return <LucideIcons.MapPin size={12}/>;
-    const IconComp = (LucideIcons as any)[iconName];
-    if (IconComp) return <IconComp size={12} />;
-    return <span>{iconName}</span>;
+    if (iconName === "🏗" || iconName === "Building") return <Hammer size={12}/>;
+    if (iconName === "📖" || iconName === "Studying") return <BookOpen size={12}/>;
+    if (iconName === "🎯" || iconName === "Location") return <MapPin size={12}/>;
+    return <DynamicIcon name={iconName} size={12} />;
   };
 
   return (
     <>
       <SEO 
-        title="About Sahil Bind — Data Scientist & AI Developer"
+        title="About Sahil Bind | Data Scientist & AI Developer"
         description="Learn more about Sahil Bind, a Data Science student at IIT Madras with a passion for building AI-driven solutions and elegant web experiences. Explore my background, skills, and journey."
         url="https://sahilbind.in/about"
       />
@@ -95,9 +102,9 @@ export default function About() {
               {siteConfig?.aboutBio || "Data Scientist & Developer building at the intersection of AI, mathematics, and clean code. INSPIRE SHE Scholar. Passionate about making complex ideas accessible."}
             </div>
             <div className="flex gap-1.5 flex-wrap">
-              <a href="https://github.com/24f2001637" target="_blank" rel="noreferrer" className="font-mono text-[10px] px-2.5 py-[5px] border border-theme-border rounded-md bg-theme-bg2 text-theme-text2 cursor-pointer transition-colors hover:border-theme-accent hover:text-theme-accent flex items-center gap-1"><LucideIcons.Github size={12}/> GitHub</a>
-              <a href="https://www.linkedin.com/in/sahilbind-24f2001637" target="_blank" rel="noreferrer" className="font-mono text-[10px] px-2.5 py-[5px] border border-theme-border rounded-md bg-theme-bg2 text-theme-text2 cursor-pointer transition-colors hover:border-theme-accent hover:text-theme-accent flex items-center gap-1"><LucideIcons.Linkedin size={12}/> LinkedIn</a>
-              <a href="mailto:sahilbind.iitm@gmail.com" className="font-mono text-[10px] px-2.5 py-[5px] border border-theme-border rounded-md bg-theme-bg2 text-theme-text2 cursor-pointer transition-colors hover:border-theme-accent hover:text-theme-accent flex items-center gap-1"><LucideIcons.Mail size={12}/> Email</a>
+              <a href="https://github.com/24f2001637" target="_blank" rel="noreferrer" className="font-mono text-[10px] px-2.5 py-[5px] border border-theme-border rounded-md bg-theme-bg2 text-theme-text2 cursor-pointer transition-colors hover:border-theme-accent hover:text-theme-accent flex items-center gap-1"><Github size={12}/> GitHub</a>
+              <a href="https://www.linkedin.com/in/sahilbind-24f2001637" target="_blank" rel="noreferrer" className="font-mono text-[10px] px-2.5 py-[5px] border border-theme-border rounded-md bg-theme-bg2 text-theme-text2 cursor-pointer transition-colors hover:border-theme-accent hover:text-theme-accent flex items-center gap-1"><Linkedin size={12}/> LinkedIn</a>
+              <a href="mailto:sahilbind.iitm@gmail.com" className="font-mono text-[10px] px-2.5 py-[5px] border border-theme-border rounded-md bg-theme-bg2 text-theme-text2 cursor-pointer transition-colors hover:border-theme-accent hover:text-theme-accent flex items-center gap-1"><Mail size={12}/> Email</a>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-2">
@@ -115,12 +122,12 @@ export default function About() {
 
         {/* Content */}
         <div>
-          <h2 className="font-serif text-[32px] text-theme-text mb-4 tracking-[-0.02em] leading-tight">
+          <h1 className="font-serif text-[32px] text-theme-text mb-4 tracking-[-0.02em] leading-tight">
             Hey, I'm Sahil.<br/><em className="italic text-theme-accent">Nice to meet you.</em>
-          </h2>
+          </h1>
           <div 
             className="space-y-5 text-[14px] text-theme-text2 leading-[1.75]"
-            dangerouslySetInnerHTML={{ __html: siteConfig?.aboutText || "<p>I'm a first-year student at IIT Madras pursuing a BS in Data Science & Applications, concurrently enrolled in BSc Mathematics at DDU Gorakhpur University. I hold the INSPIRE SHE Scholarship from the Department of Science & Technology, Govt. of India.</p><p>I'm driven by a simple belief: the best technology is invisible — it solves problems without getting in the way. That philosophy guides every project I build, every model I train, and every line of code I write.</p><p>Outside of academics, I was the Class XII Topper at my college and ranked 1st in my district at NASTA 2023. I build useful tools, write about concepts I'm learning, and curate resources that helped me. This platform is an extension of that effort.</p>" }}
+            dangerouslySetInnerHTML={{ __html: siteConfig?.aboutText || "<p>I'm a first-year student at IIT Madras pursuing a BS in Data Science & Applications, concurrently enrolled in BSc Mathematics at DDU Gorakhpur University. I hold the INSPIRE SHE Scholarship from the Department of Science & Technology, Govt. of India.</p><p>I'm driven by a simple belief: the best technology is invisible - it solves problems without getting in the way. That philosophy guides every project I build, every model I train, and every line of code I write.</p><p>Outside of academics, I was the Class XII Topper at my college and ranked 1st in my district at NASTA 2023. I build useful tools, write about concepts I'm learning, and curate resources that helped me. This platform is an extension of that effort.</p>" }}
           />
 
           <div className="mt-9">
@@ -190,7 +197,7 @@ export default function About() {
                   <div key={`cert-${i}`} className="bg-theme-card border border-theme-border rounded-xl p-6 group hover:border-theme-accent transition-colors duration-300">
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded bg-theme-bg2 border border-theme-border flex items-center justify-center shrink-0">
-                        <LucideIcons.Award className="w-5 h-5 text-theme-accent" />
+                        <Award className="w-5 h-5 text-theme-accent" />
                       </div>
                       <div>
                         <div className="font-mono text-[10px] text-theme-accent mb-1">{item.year}</div>

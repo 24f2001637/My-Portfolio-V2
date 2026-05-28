@@ -41,14 +41,14 @@ export default function Projects() {
   return (
     <>
       <SEO 
-        title="Projects Portfolio | Sahil Bind — Data Science & Web Apps"
+        title="Projects Portfolio | Sahil Bind - Data Science & Web Apps"
         description="Explore a curated collection of projects by Sahil Bind, ranging from Machine Learning models and Data Analysis to full-stack Web Applications. See how AI and data drive real-world solutions."
         url="https://sahilbind.in/projects"
       />
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20 fade-in">
         <div className="flex flex-col mb-10 pb-5 border-b border-theme-border">
         <div className="font-mono text-[10px] text-theme-text3 tracking-[0.1em] uppercase">Portfolio</div>
-        <h2 className="font-serif text-4xl tracking-[-0.02em] text-theme-text">All <em className="italic text-theme-accent">Projects</em></h2>
+        <h1 className="font-serif text-4xl tracking-[-0.02em] text-theme-text">All <em className="italic text-theme-accent">Projects</em></h1>
       </div>
 
       <div className="flex items-center gap-2.5 bg-theme-card border border-theme-border rounded-md px-3.5 py-2 mb-6 shadow-theme-card transition-colors duration-200 focus-within:border-theme-accent">

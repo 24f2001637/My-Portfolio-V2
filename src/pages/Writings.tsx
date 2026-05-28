@@ -1,11 +1,20 @@
 import { useState, useEffect } from "react";
 import { Search, ArrowRight } from "lucide-react";
-import * as LucideIcons from "lucide-react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db, handleFirestoreError, OperationType } from "../lib/firebase";
 import { Link } from "react-router-dom";
 import { formatDate } from "../lib/utils";
 import SEO from "../components/SEO";
+import { lazy, Suspense } from "react";
+
+const LazyDynamicIcon = lazy(() => import("../components/DynamicIcon"));
+function DynamicIcon(props: any) {
+  return (
+    <Suspense fallback={<div className="w-12 h-12 bg-theme-border animate-pulse rounded" />}>
+      <LazyDynamicIcon {...props} />
+    </Suspense>
+  );
+}
 
 export default function Writings() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -44,14 +53,14 @@ export default function Writings() {
   return (
     <>
       <SEO 
-        title="Writings & Blog | Sahil Bind — Insights on AI and Data Science"
+        title="Writings & Blog | Sahil Bind - Insights on AI and Data Science"
         description="Read articles, tutorials, and thoughts by Sahil Bind on artificial intelligence, data science, and web development. Stay updated with the latest trends and projects."
         url="https://sahilbind.in/writings"
       />
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 pb-20 fade-in">
         <div className="flex flex-col mb-10 pb-5 border-b border-theme-border">
         <div className="font-mono text-[10px] text-theme-text3 tracking-[0.1em] uppercase">Writing</div>
-        <h2 className="font-serif text-4xl tracking-[-0.02em] text-theme-text">All <em className="italic text-theme-accent">Writings</em></h2>
+        <h1 className="font-serif text-4xl tracking-[-0.02em] text-theme-text">All <em className="italic text-theme-accent">Writings</em></h1>
       </div>
 
       <div className="flex items-center gap-2.5 bg-theme-card border border-theme-border rounded-md px-3.5 py-2 mb-6 shadow-theme-card transition-colors duration-200 focus-within:border-theme-accent">
@@ -90,14 +99,7 @@ export default function Writings() {
                 <img src={blog.coverImage} alt={blog.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               ) : (
                 <span className="text-theme-text flex items-center justify-center">
-                  {((LucideIcons as any)[blog.icon]) ? 
-                    (() => {
-                      const IconComp = (LucideIcons as any)[blog.icon];
-                      return <IconComp size={48} className="text-theme-text" />;
-                    })()
-                    :
-                    <span>{blog.icon}</span>
-                  }
+                  <DynamicIcon name={blog.icon} size={48} className="text-theme-text" />
                 </span>
               )}
             </div>

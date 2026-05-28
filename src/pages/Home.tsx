@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
-import * as LucideIcons from "lucide-react";
+import { ArrowRight, Book, Mail, Github, ExternalLink, Hammer, BookOpen, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db, handleFirestoreError, OperationType } from "../lib/firebase";
 import { formatDate } from "../lib/utils";
 import SEO from "../components/SEO";
+import { lazy, Suspense } from "react";
+const LazyDynamicIcon = lazy(() => import("../components/DynamicIcon"));
+function DynamicIcon(props: any) {
+  return (
+    <Suspense fallback={<div className="w-4 h-4 shrink-0" />}>
+      <LazyDynamicIcon {...props} />
+    </Suspense>
+  );
+}
 
 export default function Home() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -56,7 +65,7 @@ export default function Home() {
   };
 
   const currentlyItems = parseJSON(siteConfig?.currentlyJSON, [
-    { icon: "Hammer", title: "Building", desc: "HMSCare — Hospital Mgmt System" },
+    { icon: "Hammer", title: "Building", desc: "HMSCare - Hospital Mgmt System" },
     { icon: "BookOpen", title: "Studying", desc: "GenAI & Deep Learning @ IITM" },
     { icon: "MapPin", title: "Location", desc: "Varanasi, India" }
   ]);
@@ -135,13 +144,13 @@ export default function Home() {
 
               <div className="flex gap-2.5 flex-wrap mb-16 fade-up delay-300 justify-center xl:justify-start">
                 <Link to="/projects" className="bg-theme-text text-theme-bg px-[22px] py-2.5 rounded-lg text-[13px] font-medium transition-transform duration-200 hover:-translate-y-px hover:opacity-85 flex items-center gap-1.5">
-                  View Projects <LucideIcons.ArrowRight className="w-3.5 h-3.5" />
+                  View Projects <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
                 <Link to="/resources" className="bg-transparent text-theme-text px-[22px] py-2.5 rounded-lg text-[13px] font-medium border border-theme-border transition-all duration-200 hover:-translate-y-px hover:bg-theme-bg2 flex items-center gap-1.5">
-                  <LucideIcons.Book className="w-3.5 h-3.5" /> Browse Resources
+                  <Book className="w-3.5 h-3.5" /> Browse Resources
                 </Link>
                 <Link to="/contact" className="bg-transparent text-theme-text px-[22px] py-2.5 rounded-lg text-[13px] font-medium border border-theme-border transition-all duration-200 hover:-translate-y-px hover:bg-theme-bg2 flex items-center gap-1.5">
-                  <LucideIcons.Mail className="w-3.5 h-3.5" /> Say Hello
+                  <Mail className="w-3.5 h-3.5" /> Say Hello
                 </Link>
               </div>
 
@@ -178,22 +187,16 @@ export default function Home() {
                 <div className="bg-theme-card border border-theme-border rounded-3xl p-6 w-full max-w-[320px] shadow-theme-card flex-1 xl:flex-none">
                   <div className="font-mono text-[9px] text-theme-text3 uppercase tracking-[0.1em] mb-2.5 flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                    {siteConfig?.heroCurrentlyHeading || "Now — Live"}
+                    {siteConfig?.heroCurrentlyHeading || "Now - Live"}
                   </div>
 
                   {currentlyItems.map((item: any, i: number) => (
                     <div key={i} className={`flex items-start gap-2.5 py-2 ${i !== currentlyItems.length - 1 ? 'border-b border-theme-border' : ''}`}>
                       <span className="mt-px flex items-center justify-center">
-                        {item.icon === "🏗" || item.icon === "Building" ? <LucideIcons.Hammer size={16} className="text-theme-text mt-0.5" /> :
-                          item.icon === "📖" || item.icon === "Studying" ? <LucideIcons.BookOpen size={16} className="text-theme-text mt-0.5" /> :
-                            item.icon === "🎯" || item.icon === "Location" ? <LucideIcons.MapPin size={16} className="text-theme-text mt-0.5" /> :
-                              ((LucideIcons as any)[item.icon] ?
-                                (() => {
-                                  const IconComp = (LucideIcons as any)[item.icon];
-                                  return <IconComp size={16} className="text-theme-text mt-0.5" />;
-                                })()
-                                :
-                                <span className="text-base leading-none">{item.icon}</span>)
+                        {item.icon === "🏗" || item.icon === "Building" ? <Hammer size={16} className="text-theme-text mt-0.5" /> :
+                          item.icon === "📖" || item.icon === "Studying" ? <BookOpen size={16} className="text-theme-text mt-0.5" /> :
+                            item.icon === "🎯" || item.icon === "Location" ? <MapPin size={16} className="text-theme-text mt-0.5" /> :
+                              <DynamicIcon name={item.icon} size={16} className="text-theme-text mt-0.5" />
                         }
                       </span>
                       <div className="text-xs text-theme-text2 leading-[1.4]">
@@ -216,7 +219,7 @@ export default function Home() {
               <h2 className="font-serif text-4xl tracking-[-0.02em] text-theme-text">Featured <em className="italic text-theme-accent">Projects</em></h2>
             </div>
             <Link to="/projects" className="text-xs text-theme-accent flex items-center gap-1 transition-all duration-200 hover:gap-2">
-              View all projects <LucideIcons.ArrowRight className="w-3.5 h-3.5" />
+              View all projects <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
@@ -267,8 +270,8 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="flex gap-2 mt-auto">
-                    {proj.githubLink && <a href={proj.githubLink} target="_blank" rel="noreferrer" className="text-[11px] px-2.5 py-1 rounded-md cursor-pointer border border-theme-border bg-theme-bg2 text-theme-text2 transition-colors duration-200 hover:border-theme-accent hover:text-theme-accent flex items-center gap-1"><LucideIcons.Github size={12} /> GitHub</a>}
-                    {proj.demoLink && <a href={proj.demoLink} target="_blank" rel="noreferrer" className="text-[11px] px-2.5 py-1 rounded-md cursor-pointer border border-theme-border bg-theme-bg2 text-theme-text2 transition-colors duration-200 hover:border-theme-accent hover:text-theme-accent flex items-center gap-1"><LucideIcons.ExternalLink size={12} /> Demo</a>}
+                    {proj.githubLink && <a href={proj.githubLink} target="_blank" rel="noreferrer" className="text-[11px] px-2.5 py-1 rounded-md cursor-pointer border border-theme-border bg-theme-bg2 text-theme-text2 transition-colors duration-200 hover:border-theme-accent hover:text-theme-accent flex items-center gap-1"><Github size={12} /> GitHub</a>}
+                    {proj.demoLink && <a href={proj.demoLink} target="_blank" rel="noreferrer" className="text-[11px] px-2.5 py-1 rounded-md cursor-pointer border border-theme-border bg-theme-bg2 text-theme-text2 transition-colors duration-200 hover:border-theme-accent hover:text-theme-accent flex items-center gap-1"><ExternalLink size={12} /> Demo</a>}
                   </div>
                 </div>
               </div>
@@ -287,10 +290,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {expertiseItems.map((item: any, i: number) => {
-              const IconComp = (LucideIcons as any)[item.icon] || LucideIcons.Code2;
               return (
                 <div key={i} className="bg-theme-card border border-theme-border rounded-3xl p-8 hover:border-theme-accent transition-colors duration-300">
-                  <IconComp className="w-8 h-8 text-theme-accent mb-6" />
+                  <DynamicIcon name={item.icon || "Code2"} size={32} className="text-theme-accent mb-6" />
                   <h3 className="font-serif text-xl text-theme-text mb-3">{item.title}</h3>
                   <p className="text-sm text-theme-text2 mb-6 leading-relaxed">
                     {item.desc}
@@ -375,7 +377,7 @@ export default function Home() {
               <h2 className="font-serif text-4xl tracking-[-0.02em] text-theme-text">Latest <em className="italic text-theme-accent">Writings</em></h2>
             </div>
             <Link to="/blogs" className="text-xs text-theme-accent flex items-center gap-1 transition-all duration-200 hover:gap-2">
-              All writings <LucideIcons.ArrowRight className="w-3.5 h-3.5" />
+              All writings <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
@@ -423,7 +425,7 @@ export default function Home() {
                         <span key={tag} className="font-mono text-[9px] px-[7px] py-[2px] rounded bg-theme-bg2 text-theme-text3 border border-theme-border">{tag}</span>
                       ))}
                     </div>
-                    <span className="text-[11px] text-theme-accent flex items-center gap-1 group-hover:gap-2 transition-all">Read <LucideIcons.ArrowRight className="w-3 h-3" /></span>
+                    <span className="text-[11px] text-theme-accent flex items-center gap-1 group-hover:gap-2 transition-all">Read <ArrowRight className="w-3 h-3" /></span>
                   </div>
                 </div>
               </Link>

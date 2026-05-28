@@ -5,9 +5,17 @@ import CommandPalette from "./CommandPalette";
 import { auth, db } from "../lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { collection, onSnapshot } from "firebase/firestore";
-import { Menu, X, Search, Sun, Moon, ArrowUp, Github, Linkedin, Twitter, Mail, Heart, Instagram } from "lucide-react";
+import { Menu, X, Search, Sun, Moon, ArrowUp, Heart } from "lucide-react";
+import { lazy, Suspense } from "react";
 
-const SocialIconMap: Record<string, React.ElementType> = { Github, Linkedin, Twitter, Mail, Instagram };
+const LazyDynamicIcon = lazy(() => import("./DynamicIcon"));
+function DynamicIcon(props: any) {
+  return (
+    <Suspense fallback={<div className="w-3.5 h-3.5" />}>
+      <LazyDynamicIcon {...props} />
+    </Suspense>
+  );
+}
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [isDark, setIsDark] = useState(() => {
@@ -215,12 +223,11 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
           <div className="flex items-center gap-3">
             {footerSocials.slice(0, 4).map((s, i) => {
-              const Icon = SocialIconMap[s.icon];
-              return Icon ? (
+              return (
                 <a key={i} href={s.href} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-lg border border-theme-border bg-theme-bg2 flex items-center justify-center text-theme-text3 hover:text-theme-text hover:border-theme-text3 transition-all duration-200" title={s.label}>
-                  <Icon size={14} />
+                  <DynamicIcon name={s.icon} size={14} />
                 </a>
-              ) : null;
+              );
             })}
           </div>
           <div className="flex items-center gap-4 text-[13px] text-theme-text2">

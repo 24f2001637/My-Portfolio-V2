@@ -1,4 +1,4 @@
-# Sahil Bind — Developer Portfolio
+# Sahil Bind - Developer Portfolio
 
 A modern, highly customizable personal portfolio and blog built with React, Vite, and Firebase. Designed to showcase projects, writings, and resources with a clean, minimalist aesthetic.
 
